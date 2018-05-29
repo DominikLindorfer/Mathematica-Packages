@@ -1,11 +1,9 @@
 (* ::Package:: *)
-(*Author: Dominik Lindorfer*)
-(*email: dlindo@posteo.at*)
 
 BeginPackage["ModList`"]
 
 
-ScaleY::usage = 
+ ScaleY::usage = 
 	"ScaleY[list_, parameter_] Scales every Element y of list {x,y} by 1/parameter."
 
 ShiftX::usage = 
@@ -16,6 +14,8 @@ ShiftY::usage =
 
 Take2::usage =
    "Take2[list_, a_, b_] Takes the Elements a & b of a sublist in list. Example: Take2[{{a,b,c,d,},{a,b,c,d}}, 1, 2] = {{a,b},{a,b}}."
+
+TakeSubList::usage = "TakeSubList[list_, a_, b_] Takes the Elements a to b of a sublist in list. Example: TakeSubList[{{a,b,c,d,},{a,b,c,d}}, 1, 3] = {{a,b,c},{a,b,c}}."
 
 Begin[ "Private`"]
 
@@ -37,6 +37,9 @@ Take2[list_, a_, b_] := Module[{},
 
   Map[#[[{a, b}]] &, list]
 ]
+
+
+TakeSubList[list_, X__] := Map[Take[#, {X}]&, list]
 
 
 End[]
