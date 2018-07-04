@@ -19,10 +19,8 @@ TakeSubList::usage = "TakeSubList[list_, a_, b_] Takes the Elements a to b of a 
 
 TakeSubListExcept::usage = "TakeSubListExcept[list_, a_, b_] Takes all Elements without the sublist from a to b in a list. Example: TakeSubList[{{a,b,c,d,},{a,b,c,d}}, 2, 3] = {{a, d},{a, d}}."
 
-InsertSubList[list_, sublist_, position_]::usage = "InsertSubList[list_, sublist_, position_] inserts the sublist into a list at the given position. Example: InsertSubList[{a, b, c, d, e}, {z, x, y}, 3] = {a, b, z, x, y, c, d, e}."
+InsertSubList::usage = "InsertSubList[list_, sublist_, position_, NestedLists_: False] Inserts the sublist into a list at the given position. If NestedLists is set to True, list and sublist are expected to be NestedLists. \n \n Example 1: InsertSubList[{a, b, c, d, e}, {z, x, y}, 3] = {a, b, z, x, y, c, d, e}. \n Example 2: a1 = {{100, 1000, 2000}, {100, 1000, 2000}}; a2 = {{1, 2, 3, 4}, {5, 6, 7, 8}}; InsertSubList[a2, a1, 2, True] = {{1, 100, 1000, 2000, 2, 3, 4}, {5, 100, 1000, 2000, 6, 7, 8}}"
 
-
-InsertSubList[list_, sublist_, position_] := MapThread[Flatten[Insert[#1, #2, position]] &, {list, sublist}]
 
 Begin[ "Private`"]
 
@@ -36,7 +34,18 @@ TakeSubList[list_, X__] := Map[Take[#, {X}]&, list]
 
 TakeSubListExcept[list_, X__] := Map[Drop[#, {X}] &, list]
 
-InsertSubList[list_, sublist_, position_] := MapThread[Flatten[Insert[#1, #2, position]] &, {list, sublist}]
+InsertSubList[list_, sublist_, position_, NestedLists_: False] := Module[{},
+  
+  If[	NestedLists,
+   
+   		MapThread[Flatten[Insert[#1, #2, position]] &, {list, sublist}],
+   
+   		Flatten[Insert[list, sublist, position]],
+   
+   		Print["Specify if a Nested-List is given to InsertSubList[]!"]
+   	]
+  
+]
 
 
 ScaleY[list_,para_]:=Module[{i,list1},list1=list;
