@@ -1,5 +1,8 @@
 (* ::Package:: *)
 
+(*Author: Dominik Lindorfer*)
+(*email: dlindo@posteo.at*)
+
 BeginPackage["ModList`"]
 
 
