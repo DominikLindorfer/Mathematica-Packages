@@ -8,3 +8,5 @@ Custom ListPlot[] function to get plots in publishable style by manipulating Mat
 
 ## ModList.m
 Package for easy manipulation of Mathematica lists by using a simplistic mixture of function-mapping and range-based loops.
+
+![alt text](https://github.com/DominikLindorfer/Mathematica-Packages/files/3345991/sample_fig.pdf)
